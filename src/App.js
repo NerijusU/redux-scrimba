@@ -1,16 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from "react"
+import {useSelector, useDispatch} from "react-redux"
+import {increment, decrement} from "./redux"
 
 function App(props) {
-  return (
-    <div>
-      <h1>{props.count}</h1>
-      <button>-</button>
-      <button>+</button>
-    </div>
-  );
+    const count = useSelector(state => state)
+    const dispatch = useDispatch()
+    return (
+        <div>
+            <h1>{count}</h1>
+            <button onClick={() => dispatch(decrement())}>-</button>
+            <button onClick={() => dispatch(increment())}>+</button>
+        </div>
+    )
 }
 
-const mapStateToProps = (globalState) => ({count: globalState})
+export default App
 
-export default connect(mapStateToProps, {})(App);
+// https://thoughtbot.com/blog/using-redux-with-react-hooks
+// https://react-redux.js.org/api/hooks#usage-warnings
